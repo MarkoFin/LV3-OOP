@@ -1,0 +1,88 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Zadatak
+{
+    class Pravokutnik : GeometrijskiLik
+    {
+        protected float _a, _b;
+
+        public Pravokutnik()
+        {
+            _a = 0;
+            _b = 0;
+        }
+
+        public Pravokutnik(float a, float b)
+        {
+            _a = a;
+            _b = b;
+        }
+
+        public Pravokutnik(string bo, float a, float b) : base(bo)
+        {
+            _a = a;
+            _b = b;
+        }
+
+        ~Pravokutnik()
+        {
+            Console.WriteLine("Unisten objekt Pravokutnik");
+        }
+
+        public override void Tip()
+        {
+            Console.WriteLine("Pravokutnik sa stranicama duljine " + _a + " i " + _b);
+        }
+
+        public override float Povrsina()
+        {
+            return _a * _b;
+        }
+
+        public override float Opseg()
+        {
+            return 2 * _a + 2 * _b;
+        }
+    }
+
+    class Kvadrat : Pravokutnik
+    {
+        public Kvadrat()
+        {
+            _a = 1;
+        }
+
+        public Kvadrat(float a)
+        {
+            _a = a;
+        }
+
+        public Kvadrat(string bo, float a) : base(bo, a, a)
+        {
+        }
+
+        ~Kvadrat()
+        {
+            Console.WriteLine("Unisten objekt Kvadrat");
+        }
+
+        public override void Tip()
+        {
+            Console.WriteLine("Kvadrat sa stranicom duljine " + _a);
+        }
+
+        public override float Povrsina()
+        {
+            return _a * _a;
+        }
+
+        public override float Opseg()
+        {
+            return 4 * _a;
+        }
+    }
+}
