@@ -1,0 +1,202 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Zadatak
+{
+    public class Trokut : GeometrijskiLik
+    {
+        protected float _a, _b, _c;
+
+        public Trokut()
+        {
+            _a = _b = _c = 0;
+        }
+
+        public Trokut(float a, float b, float c)
+        {
+            _a = a;
+            _b = b;
+            _c = c;
+        }
+
+        public Trokut(string bo, float a, float b, float c) : base(bo)
+        {
+            _a = a;
+            _b = b;
+            _c = c;
+        }
+
+        protected virtual bool isValid()
+        {
+            if (_a <= 0 || _b <= 0 || _c <= 0)
+                return false;
+            else if ((_a + _b) <= _c || (_a + _c) <= _b || (_b + _c) <= _a)
+                return false;
+            else
+                return true;
+        }
+
+        public override void Tip()
+        {
+            Console.WriteLine("Trokut sa stranicama duljine " + _a + ", " + _b + " i " + _c);
+        }
+
+        ~Trokut()
+        {
+            Console.WriteLine("Unisten objekt Trokut");
+        }
+
+        public override float Povrsina()
+        {
+            if (isValid())
+            {
+                float s = (_a + _b + _c) / 2;
+                float P = (float)Math.Sqrt(s * (s - _a) * (s - _b) * (s - _c));
+                return P;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+
+        public override float Opseg()
+        {
+            if (isValid())
+            {
+                return _a + _b + _c;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+    }
+
+    //////////////////////////////////////////////////
+
+    public class JednakostranicniTrokut : Trokut
+    {
+        public JednakostranicniTrokut(float a)
+        {
+            _a = a;
+        }
+
+        ~JednakostranicniTrokut()
+        {
+            Console.WriteLine("Unisten objekt JednakostranicniTrokut");
+        }
+
+        public override void Tip()
+        {
+            Console.WriteLine("Jednakostranicni trokut sa stranicom duljine " + _a);
+        }
+
+        public override float Povrsina()
+        {
+            return (float)(Math.Sqrt(3) / 4) * _a * _a;
+        }
+
+        public override float Opseg()
+        {
+            return 3 * _a;
+        }
+    }
+
+    //////////////////////////////////////////////////
+
+    public class PravokutniTrokut : Trokut
+    {
+        public PravokutniTrokut(float a, float b, float c)
+        {
+            _a = a;
+            _b = b;
+            _c = c;
+        }
+
+        ~PravokutniTrokut()
+        {
+            Console.WriteLine("Unisten objekt PravokutniTrokut");
+        }
+
+        protected override bool isValid()
+        {
+            if (_a <= 0 || _b <= 0 || _c <= 0)
+                return false;
+            else if ((_a + _b) <= _c || (_a + _c) <= _b || (_b + _c) <= _a)
+                return false;
+            else if (_a * _a + _b * _b != _c * _c)
+                return false;
+            else
+                return true;
+        }
+
+        public override void Tip()
+        {
+            Console.WriteLine("Pravokutni trokut sa stranicama duljine " + _a + ", " + _b + " i " + _c);
+        }
+
+        public override float Povrsina()
+        {
+            if (isValid())
+                return _a * _b / 2;
+            else
+                return -1;
+        }
+    }
+
+    public class JednakokracanTrokut : Trokut
+    {
+        public JednakokracanTrokut(float a, float b, float c)
+        {
+            _a = a;
+            _b = b;
+            _c = c;
+        }
+
+        ~JednakokracanTrokut()
+        {
+            Console.WriteLine("Unisten objekt JednakokracanTrokut");
+        }
+
+        
+        private float Visina()
+        {
+            
+            return (float)Math.Sqrt(_a * _a - (_c / 2) * (_c / 2));
+        }
+
+        
+        protected override bool isValid()
+        {
+            if (_a <= 0 || _b <= 0 || _c <= 0)
+                return false;
+            else if (_a != _b)
+                return false;
+            else if ((_a + _b) <= _c)
+                return false;
+            else
+                return true;
+        }
+
+        public override void Tip()
+        {
+            Console.WriteLine("Jednakokracan trokut sa stranicama " + _a + ", " + _b + " i " + _c);
+        }
+
+        public override float Povrsina()
+        {
+            if (isValid())
+            {
+                return (_c * Visina()) / 2;
+            }
+            else
+            {
+                return -1;
+            }
+        }
+    }
+}
