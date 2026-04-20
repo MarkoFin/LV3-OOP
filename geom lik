@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Zadatak
+{
+    public class GeometrijskiLik
+    {
+        public string boja;
+        public static int brojac = 0;
+
+        public GeometrijskiLik()
+        {
+            boja = "Zelena";
+            brojac++;
+        }
+
+        public virtual void Tip()
+        {
+            Console.WriteLine("Geometrijski lik.");
+        }
+
+        public GeometrijskiLik(string b)
+        {
+            boja = b;
+            brojac++;
+        }
+
+        ~GeometrijskiLik()
+        {
+            Console.WriteLine("Unisten objekt GeometrijskiLik");
+        }
+
+        public virtual float Povrsina()
+        {
+            Console.WriteLine("Povrsina geometrijskog lika.");
+            return 0;
+        }
+
+        public virtual float Opseg()
+        {
+            Console.WriteLine("Opseg geometrijskog lika.");
+            return 0;
+        }
+    }
+}
