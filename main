@@ -1,0 +1,74 @@
+using System.Collections.Generic;
+using System;
+using Zadatak;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        GeometrijskiLik t1 = new Trokut("Plava", 2, 3, 30);
+        GeometrijskiLik t2 = new JednakostranicniTrokut(2);
+        GeometrijskiLik t3 = new PravokutniTrokut(3, 4, 6);
+        GeometrijskiLik k1 = new Krug(); // _r = 1 zbog konstruktora
+        GeometrijskiLik k2 = new Krug((float)3.4);
+        GeometrijskiLik p1 = new Pravokutnik("Crvena", (float)2.5, 4);
+        GeometrijskiLik kv1 = new Kvadrat("Zuta", 5); // boja="Zuta", a=5
+        GeometrijskiLik kv2 = new Kvadrat(); // _a = 1 zbog konstruktora
+
+        GeometrijskiLik t4 = new Trokut("Zelena", 5, 5, 5);
+        GeometrijskiLik t5 = new PravokutniTrokut(6, 8, 10);
+        GeometrijskiLik k3 = new Krug((float)5.5);
+        GeometrijskiLik p2 = new Pravokutnik("Plava", 3, 7);
+        GeometrijskiLik kv3 = new Kvadrat("Crna", 4);
+
+        GeometrijskiLik e1 = new Elipsa(3, 5);
+        GeometrijskiLik e2 = new Elipsa("Ljubicasta", 4, 6);
+
+        GeometrijskiLik jt1 = new JednakokracanTrokut(5, 5, 6);
+        GeometrijskiLik jt2 = new JednakokracanTrokut(4, 4, 3);
+
+        Console.WriteLine("Lista geometrijskih likova:");
+
+        List<GeometrijskiLik> geom_likovi = new List<GeometrijskiLik>()
+        {
+            t1, t2, t3, k1, k2, p1, kv1, kv2, t4, t5, k3, p2, kv3, e1, e2, jt1, jt2
+        };
+
+        foreach (GeometrijskiLik g in geom_likovi)
+        {
+            g.Tip();
+
+            if (g.Opseg() <= 0 || g.Povrsina() <= 0)
+            {
+                Console.WriteLine("Geometrijski lik nije dobro definiran!");
+                Console.WriteLine("Boja: " + g.boja);
+                Console.WriteLine();
+            }
+            else
+            {
+                Console.WriteLine("Opseg: " + g.Opseg());
+                Console.WriteLine("Povrsina: " + g.Povrsina());
+                Console.WriteLine("Boja: " + g.boja);
+                Console.WriteLine();
+            }
+        }
+
+        List<Trokut> trokuti = new List<Trokut>()
+        {
+            (Trokut)t1, (Trokut)t2, (Trokut)t3, (Trokut)t4, (Trokut)t5, (Trokut)jt1, (Trokut)jt2
+        };
+
+        Console.WriteLine("Lista trokuta:");
+
+        foreach (Trokut t in trokuti)
+        {
+            t.Tip();
+            Console.WriteLine("Opseg: " + t.Opseg());
+            Console.WriteLine("Povrsina: " + t.Povrsina());
+            Console.WriteLine("Boja: " + t.boja);
+            Console.WriteLine();
+        }
+
+        Console.WriteLine("Ukupno kreiranih objekata: " + GeometrijskiLik.brojac);
+    }
+}
